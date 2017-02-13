@@ -1,0 +1,35 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+class TurnBasedFighter{
+    private:
+    
+    
+    //variables needed to be manipulated go here
+    
+    public:
+    
+        void Characters(){
+        
+        cout << "  _._" << setw(70) << "  _._" << endl;
+        cout << ".'--.`." << setw(70) << ".'--.`." << endl;
+        cout << "|  .' |" << setw(70) << "|  .' |" << endl;
+        cout << " `--`'" << setw(70) << " `--`'" << endl;
+
+            
+        
+        }
+
+
+};
+
+int main() {
+
+    TurnBasedFighter Chars;
+    Chars.Characters();
+
+
+    return 0;
+}
