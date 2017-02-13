@@ -2,6 +2,8 @@
 
 using namespace std;
 
+int gridSize = 15;
+
 void howToPlay()
 {
     cout << "------------------------RULES------------------------" << endl;
@@ -65,11 +67,34 @@ bool mainMenu()
     }
 }
 
+void grid()
+{
+    for(int y = 0; y < gridSize; y++)
+    {
+        for(int i = 0; i < gridSize;i++)
+        {
+            cout << "▄▄▄▄";
+        }
+        cout << "▄▄▄▄▄▄▄" << endl;
+        
+        for(int x = 0; x < gridSize; x++)
+        {
+            cout << "▓    ";
+        }
+        cout << endl;
+        for(int x = 0; x < gridSize; x++)
+        {
+            cout << "▓    ";
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
     while(mainMenu())   //the player can choose to close the game
     {
-        
+        grid();
     }
     return 0;
 }
