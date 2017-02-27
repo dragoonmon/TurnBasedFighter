@@ -1,0 +1,21 @@
+void grid()
+{
+    for(int y = 0; y < 10; y++)
+    {
+        cout << "----------------------------------------" << endl;
+        for(int x = 0; x < 10; x++)
+        {
+            cout << "|";
+            
+            if(x == playerPosition[0] && playerPosition[1] == y)
+            {
+                cout << "PP|";
+            }
+            else
+            {
+               cout << "  |" ; 
+            }
+        }
+        cout << endl;
+    }
+}
