@@ -1,0 +1,89 @@
+#include <iostream>
+#include <array>
+
+using namespace std;
+
+array<int, 1> playerPosition;
+array<int, 1> computerPosition;
+int gridSize = 10;
+bool playing = true;
+
+void grid()
+{
+    for(int y = 0; y < 10; y++)
+    {
+        cout << "----------------------------------------" << endl;
+        for(int x = 0; x < 10; x++)
+        {
+            cout << "|";
+            
+            if(x == playerPosition[0] && y == playerPosition[1])
+            {
+                cout << "PP";
+            }
+            else if(x == computerPosition[0] && y == computerPosition[1])
+            {
+              cout << "CP";  
+            }
+            else
+            {
+                cout << "  ";
+            }
+            
+               cout << "|" ; 
+        }
+        cout << endl;
+    }
+}
+
+
+void movePlayer()
+{
+    
+    cout << "Select an option: " << endl;
+    cout << "1. UP" << endl;
+    cout << "2. DOWN" << endl;
+    cout << "3. LEFT" << endl;
+    cout << "4. RIGHT" << endl;
+    
+    int i;
+    cin >> i;
+    
+    if(i == 1)
+    {
+        playerPosition[1] -= 1;
+    }
+    else if(i == 2)
+    {
+        playerPosition[1] += 1;
+    }
+    else if(i == 3)
+    {
+        playerPosition[0] -= 1;
+    }
+    else if(i == 4)
+    {
+        playerPosition[0] += 1;
+    }
+}
+
+
+
+void playGame()
+{
+    while(true)
+    {
+    grid();
+    movePlayer();
+    }
+}
+
+
+int main()
+{
+    playerPosition[1] = 4;
+    computerPosition[0] = 9;
+    computerPosition[1] = 5;
+    playGame();
+    return 0;
+}
