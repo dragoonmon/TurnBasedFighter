@@ -31,6 +31,18 @@ bool checkMove(int direction)
     return true;
 }
 
+bool checkAttack()
+{
+    if((abs(playerPosition[1] - comPosition[1]) == 1 && playerPosition[2] == comPosition[2]) || (abs(playerPosition[2] - comPosition[2]) == 1 && playerPosition[1] == comPosition[1]))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 void grid()
 {
     for(int y = 0; y < 10; y++)
@@ -72,9 +84,9 @@ void movePlayer()
         cout << "2. DOWN" << endl;
         cout << "3. LEFT" << endl;
         cout << "4. RIGHT" << endl;
-
+        cout << "5. REST" << endl;
         cin >> i;
-    } while(checkMove(i) == false);
+    } while(checkMove(i) == false && i < 6);
 
     if(i == 1)
     {
@@ -94,7 +106,11 @@ void movePlayer()
     }
 }
 
-
+void gameOver()
+{
+    grid();
+    cout << "Game Over!" << endl;
+}
 
 void playGame()
 {
@@ -104,10 +120,13 @@ void playGame()
     comPosition[1] = 3;
     comPosition[2] = 4;
 
-    while(true)
+    while(playing)
     {
     movePlayer();
+    playing = checkAttack();
     }
+
+    gameOver();
 }
 
 
