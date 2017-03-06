@@ -7,7 +7,7 @@ PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
 
 -- Table: Characters
-CREATE TABLE Characters (ID INTEGER PRIMARY KEY, Class INTEGER, Health INTEGER, Attack INTEGER, Defense INTEGER, Movement INTEGER);
+CREATE TABLE Characters (ID INTEGER PRIMARY KEY, Class CHAR, Health INTEGER, Attack INTEGER, Defense INTEGER, Movement INTEGER);
 INSERT INTO Characters (ID, Class, Health, Attack, Defense, Movement) VALUES (1, 'Mage', 100, 10, 0, 5);
 INSERT INTO Characters (ID, Class, Health, Attack, Defense, Movement) VALUES (2, 'Crossbow', 100, 6, 7, 5);
 INSERT INTO Characters (ID, Class, Health, Attack, Defense, Movement) VALUES (3, 'Archer', 100, 3, 10, 5);
