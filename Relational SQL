@@ -1,0 +1,10 @@
+CREATE TABLE Classes (ID INTERGER PRIMARY KEY, Class CHAR);
+INSERT INTO Classes (ID, Class) VALUES (1, 'Mage');
+INSERT INTO Classes (ID, Class) VALUES (2, 'Crossbow');
+INSERT INTO Classes (ID, Class) VALUES (3, 'Archer');
+INSERT INTO Classes (ID, Class) VALUES (4, 'Knight');
+INSERT INTO Classes (ID, Class) VALUES (5, 'Beserker');
+INSERT INTO Classes (ID, Class) VALUES (6, 'Templar');
+
+CREATE TABLE Stats (ID INTEGER FOREIGN KEY, Health INTEGER , Attack INTEGER, Defense INTEGER, Movement INTEGER);
+INSERT INTO Stats (Health, Attack, Defense, Movement) VALUES (100, 10, 5, 5);
