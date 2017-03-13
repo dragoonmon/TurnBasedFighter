@@ -1,11 +1,3 @@
-/**
- * Copyrights:
- *  Netlogic Belgium:
- *   Ruben De Smet
- *
- * this file is licensed under the terms stated in the LICENCE file
- *
- */
 
 #include <sqlite3.h>
 #include <string>
