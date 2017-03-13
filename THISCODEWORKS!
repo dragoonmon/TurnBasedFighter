@@ -3,6 +3,8 @@
 
 using namespace std;
 
+#include "libsqlite.hpp"
+
 array<int, 2> playerPosition;
 array<int, 2> comPosition;
 
@@ -10,6 +12,135 @@ int gridSize = 10;
 bool playing = true;
 int movesLeft = 3;
 
+class Ranged {   
+   private:
+        int health;
+        int movement;
+};
+
+class Meele {
+    private:
+        int health;
+        int movement;
+};
+           
+class Mage: Ranged {
+    private:
+        int Attack;
+        int Defence;
+    public:
+        void setStats()
+        {
+            sqlite::sqlite db( "Characters.db" );    // open database
+
+            auto cur = db.get_statement();            // create query
+            cur->set_sql( "SELECT * FROM Characters WHERE ID = 1;" );
+            cur->prepare();                            // run query
+    
+            cur->step();
+            Attack = cur->get_int(10);
+            Defence = cur-> get_int(0);
+        }
+};   
+
+class Crossbow: Ranged {
+    private:
+        int Attack ;
+        int Defence;
+    public:
+        void setStats()
+        {
+            sqlite::sqlite db( "Characters.db" );    // open database
+
+            auto cur = db.get_statement();            // create query
+            cur->set_sql( "SELECT * FROM Characters WHERE ID = 2;" );
+            cur->prepare();                            // run query
+    
+            cur->step();
+            Attack = cur->get_int(6);
+            Defence = cur-> get_int(7);
+        }
+};
+    
+class Archer: Ranged {
+    private:
+        int Attack ;
+        int Defence;
+    public:
+        void setStats()
+        {
+            sqlite::sqlite db( "Characters.db" );    // open database
+
+            auto cur = db.get_statement();            // create query
+            cur->set_sql( "SELECT * FROM Characters WHERE ID = 3;" );
+            cur->prepare();                            // run query
+    
+            cur->step();
+            Attack = cur->get_int(3);
+            Defence = cur-> get_int(10);
+        }
+};
+    
+    
+class Knight: Meele {
+    private:
+        int Attack ;
+        int Defence;
+    public:
+        void setStats()
+        {
+            sqlite::sqlite db( "Characters.db" );    // open database
+
+            auto cur = db.get_statement();            // create query
+            cur->set_sql( "SELECT * FROM Characters WHERE ID = 4;" );
+            cur->prepare();                            // run query
+    
+            cur->step();
+            Attack = cur->get_int(10);
+            Defence = cur-> get_int(8);
+        }
+};
+
+    
+class Berserker: Meele {
+    private:
+        int Attack ;
+        int Defence;
+    public:
+        void setStats()
+        {
+            sqlite::sqlite db( "Characters.db" );    // open database
+
+            auto cur = db.get_statement();            // create query
+            cur->set_sql( "SELECT * FROM Characters WHERE ID = 5;" );
+            cur->prepare();                            // run query
+    
+            cur->step();
+            Attack = cur->get_int(12);
+            Defence = cur-> get_int(5);
+        }
+};
+    
+    
+class Templar: Meele {
+    private:
+        int Attack ;
+        int Defence;
+    public:
+        void setStats()
+        {
+            sqlite::sqlite db( "Characters.db" );    // open database
+
+            auto cur = db.get_statement();            // create query
+            cur->set_sql( "SELECT * FROM Characters WHERE ID = 6;" );
+            cur->prepare();                            // run query
+    
+            cur->step();
+            Attack = cur->get_int(8);
+            Defence = cur-> get_int(12);
+        }
+};
+    
 bool checkMove(int direction)
 {
     if(playerPosition[1] == 0 && direction == 3)
