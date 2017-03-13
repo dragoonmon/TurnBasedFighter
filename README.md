@@ -22,6 +22,8 @@ sqlite3
   
 .read database.sql
 
+SELECT * FROM Characters;      <-- show values in database
+
 .backup main Characters.db
 
 .quit
