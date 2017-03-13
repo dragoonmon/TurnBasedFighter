@@ -8,7 +8,7 @@ BEGIN TRANSACTION;
 
 -- Table: Characters
 CREATE TABLE Characters (ID INTEGER PRIMARY KEY, Class CHAR, Health INTEGER, Attack INTEGER, Defense INTEGER, Movement INTEGER);
-INSERT INTO Characters (ID, Class, Health, Attack, Defense, Movement) VALUES (1, 'Templar', 100, 8, 12, 5);
+INSERT INTO Characters (ID, Class, Health, Attack, Defense, Movement) VALUES (1, 'CPU', 80, 8, 12, 5);
 
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;
