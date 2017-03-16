@@ -1,0 +1,13 @@
+CREATE TABLE MovesTaken (
+ID INTEGER,
+Player_Name CHAR,
+Moves INTEGER,
+FOREIGN KEY (ID) REFERENCES Characters(ID));
+
+INSERT INTO MovesTaken (ID, Moves) VALUES (1, 0);
+INSERT INTO MovesTaken (ID, Moves) VALUES (2, 0);
+INSERT INTO MovesTaken (ID, Moves) VALUES (3, 0);
+INSERT INTO MovesTaken (ID, Moves) VALUES (4, 0);
+INSERT INTO MovesTaken (ID, Moves) VALUES (5, 0);
+INSERT INTO MovesTaken (ID, Moves) VALUES (6, 0);
+
