@@ -204,7 +204,7 @@ void grid()
     }
 }
 
-void comEdgeCheck(){
+void comEdgeCheck(){    //function to not let computer get out of the grid
 
     int xVal = rand() % 5 + 1;
     int yVal = rand() % 5 + 1;
@@ -231,7 +231,7 @@ void comEdgeCheck(){
     }
 
     if(comPosition[2] > 9){
-        comPosition[2] -= 5;
+        comPosition[2] -= 5; //make sure it is within the boundaries
     }
     else if(comPosition[2] < 0){
         comPosition[2] += 5;
@@ -248,7 +248,7 @@ void ComAggression(){
 
     if((comPosition[1] == playerPosition[1] + Distance) || (comPosition[1] == playerPosition[1] - Distance)){
         if(Direction == 1){
-            comPosition[2] -= 1;
+            comPosition[2] -= 1;    //if player is near computer, let computer move away or toward player
         }
         else if(Direction == 2){
             comPosition[2] += 1;
@@ -264,7 +264,7 @@ void ComAggression(){
     else if((comPosition[2] == playerPosition[2] + Distance) || (comPosition[2] == playerPosition[2] - Distance)){
         if(Direction == 1){
             comPosition[2] -= 1;
-        }
+        }                                 //check Y axis for player
         else if(Direction == 2){
             comPosition[2] += 1;
         }
@@ -284,32 +284,32 @@ void comMove(){
     int yVal = rand() % 5 + 1;
 
     if(playerPosition[1] <= 5){
-        comPosition[1] -= xVal;
+        comPosition[1] -= xVal;  //allow computer to move depending on player position on X axis
         comPosition[2] += yVal;
 
-        comEdgeCheck();
+        comEdgeCheck(); //perform both checks
         ComAggression();
     }
     else if(playerPosition[1] > 5){
         comPosition[1] += xVal;
         comPosition[2] += yVal;
 
-        comEdgeCheck();
+        comEdgeCheck();       //perform both checks
         ComAggression();
     }
 
     if(playerPosition[2] <= 5){
-        comPosition[1] += xVal;
+        comPosition[1] += xVal; //allow computer to move depending on player position on Y axis
         comPosition[2] -= yVal;
 
-        comEdgeCheck();
+        comEdgeCheck();    //perform both checks
         ComAggression();
     }
     else if(playerPosition[2] > 5){
         comPosition[1] += xVal;
         comPosition[2] += yVal;
 
-        comEdgeCheck();
+        comEdgeCheck();    //perform both checks
         ComAggression();
     }
 }
@@ -353,13 +353,13 @@ void movePlayer()
     else if(i == 5)
     {
         movesLeft = 3;
-        comMove();
+        comMove(); //after player turn, make computer turn
     }
 
     if (movesLeft == 0)
     {
         movesLeft = 3;
-        comMove();
+        comMove();  //after player turn, make computer turn
     }
 }
 
