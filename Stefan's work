@@ -1,0 +1,411 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int x=1, y=1 ; /* Coordinates */
+float hp;
+int dmg,armor=0;  /* Declaring health damage and armor, also setting armor to 0 in case a class has no armor */
+int enemy_hp=100; /* Enemy health and damage */
+int enemy_dmg=10;
+
+class entity /* Moving the object */
+{
+    int line,column; //coordinates using the abscissa and ordinate
+public:
+    void up();
+    void down();
+    void left();
+    void right();
+    void set_line(int x)
+    {
+        line=x;
+    }
+    void set_column(int x)
+    {
+        column=x;
+    }
+    int get_line()
+    {
+        return line;
+    }
+    int get_column()
+    {
+        return column;
+    }
+};
+
+
+void entity::up()
+{
+    line=line-1;
+}
+
+void entity::down()
+{
+    line=line+1;
+}
+
+void entity::left()
+{
+    column=column-1;
+}
+
+void entity::right()
+{
+    column=column+1;
+}
+
+
+void printareMap(char a[10][10]) /* Printing the map */
+{
+    int i,j;
+    for(i=0; i<10; i++)
+    {
+        for(j=0; j<10; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+
+}
+
+int sub ()
+{
+    int i,j,lin,col,option;
+    char Maps[10][10];
+    entity human; //the name of the object is human
+
+
+
+
+    system("clear");
+
+    for(i=0; i<10; i++)
+        for(j=0; j<10; j++)
+            Maps[i][j]='0';
+
+
+    for(i=0; i<10; i++) /* Creating the border */
+    {
+        Maps[i][0]='*';
+        Maps[0][i]='*';
+        Maps[9][i]='*';
+        Maps[i][9]='*';
+    }
+
+
+    cout <<"Choose spawning coordinates:";
+    cin >> lin >> col; /* Introducing the coordinates for the player */
+    Maps[8][8]='C'; /* The enemy is static */
+    Maps[lin][col]='P';
+    human.set_line(lin); 
+    human.set_column(col);
+    printareMap(Maps);
+
+
+    do
+    {
+Loop_3:
+        cout <<"1)Forward \n";
+        cout <<"2)Down \n";
+        cout <<"3)Left \n";
+        cout <<"4)Right \n";
+        cout <<"5)Exit \n";
+        cout <<"Map:"<<endl;
+        cout << endl;
+        cin >> option;
+
+
+        switch(option) /* Making the object move deppending on your input */
+        {
+        case 1:
+
+            if(Maps[lin][col-1]!='*')
+            {
+                system("clear");
+                human.up();
+                Maps[lin][col]='0';
+                lin=human.get_line();
+                col=human.get_column();
+                Maps[lin][col]='P';
+                printareMap(Maps);
+            }
+
+            else
+            {
+                cout<<"You can't move there"<<endl; /* Touching the border */
+                goto Loop_3;
+
+            }
+            break;
+
+        case 2:
+
+            if(Maps[lin+1][col]!='*'&&Maps[lin+1][col]!='C')
+            {
+                system("clear");
+                human.down();
+                Maps[lin][col]='0';
+                lin=human.get_line();
+                col=human.get_column();
+                Maps[lin][col]='P';
+                printareMap(Maps);
+            }
+             else
+            if(Maps[lin+1][col]=='C')  /* You've hit the enemy */
+            {   system("clear");
+                cout<<"You have attacked the enemy \n "<<endl;
+              if(armor>0)
+                 {armor=armor-enemy_dmg;
+                  if(armor<0)
+                    hp=hp+armor;
+                 }
+                 else
+                hp=hp-enemy_dmg;
+                enemy_hp=enemy_hp-dmg;
+                cout<<"Your hp: "<<hp<<endl;
+                cout<<"Enemy hp: " <<enemy_hp<<endl;
+                cout<<"Armor left: " <<armor<<endl;
+                printareMap(Maps);
+                if(enemy_hp<=0)
+                {
+                    cout<<"GAME OVER!";
+                    return 0;
+                }
+                else
+                    goto Loop_3;
+            }
+            else
+            {
+                cout<<"You can't move there"<<endl; /* Touching the border */
+                goto Loop_3;
+            }
+            break;
+
+        case 3:
+
+            if(Maps[lin][col-1]!='*')
+            {
+                system("clear");
+                human.left();
+                Maps[lin][col]='0';
+                lin=human.get_line();
+                col=human.get_column();
+                Maps[lin][col]='P';
+                printareMap(Maps);
+            }
+            else
+            {
+                cout<<"You can't move there"<<endl; /* Touching the border */
+                goto Loop_3;
+            }
+
+            break;
+
+        case 4:
+
+            if(Maps[lin][col+1]!='*'&&Maps[lin][col+1]!='C')
+            {
+                system("clear");
+                human.right();
+                Maps[lin][col]='0';
+                lin=human.get_line();
+                col=human.get_column();
+                Maps[lin][col]='P';
+                printareMap(Maps);
+            }
+
+           else
+              if(Maps[lin][col+1]=='C')  /* You've hit the enemy */
+            {   system("clear");
+                cout<<"You have attacked the enemy \n "<<endl;
+                if(armor>0)
+                 {armor=armor-enemy_dmg;
+
+                  if(armor<0)
+                    hp=hp+armor;
+                 }
+                 else
+                hp=hp-enemy_dmg;
+                enemy_hp=enemy_hp-dmg;
+
+                cout<<"Your hp: "<<hp<<endl;
+                cout<<"Enemy hp: " <<enemy_hp<<endl;
+                cout<<"Armor left: " <<armor<<endl;
+                printareMap(Maps);
+                if(enemy_hp<=0)
+                {
+                    cout<<"GAME OVER!";
+                    return 0;
+                }
+                else
+                    goto Loop_3;
+            }
+
+
+
+            else
+            {
+                cout<<"You can't move there"<<endl;
+                goto Loop_3;
+
+            break;
+        }
+        }
+    }
+    while(option!=5);
+
+
+
+
+}
+
+void rules()  /* Printing the rules */
+{
+    cout << "------------------------RULES------------------------" << endl;
+    cout << "This is a turn based fighter game." << endl;
+    cout << "The aim is to eliminate the other players units." << endl;
+    cout << "Each unit has a movement speed. Each turn it can move that many tiles." << endl;
+    cout << "Each unit has an attack stat and a defense stat." << endl;
+    cout << "To destroy an enemy unit, the attack stat must be higher." << endl;
+    cout << "If the defending enemy has a higer defense than the attacker's attack, both units survive" << endl;
+    cout << "Ranged units can leave a space between it and the enemy when it attacks" << endl;
+    cout << endl;
+
+}
+
+void clase() /* Menu */
+{
+Loop_1:
+    cout<<"Select a class:"<<endl;
+    cout << "1.Human" << endl;
+    cout << "2.Orc" << endl;
+    cout << "3.Troll" << endl;
+    cout << "4.Elf" << endl;
+    cout <<"5.Details about classes"<<endl;
+    cout<<"6.Back"<<endl;
+    int number_class;
+    cin>>number_class;
+
+    while(number_class>6  || number_class<1)
+    {
+        cout<<"Wrong number, please select another one"<<endl;
+        cin>>number_class;
+    }
+    cout<<endl;
+
+    switch(number_class) /* Giving the object the class attributes */
+    {
+    case 1:
+        cout<<"You have selected the Human" <<endl;
+        dmg=15;
+        hp=150;
+        armor=30;
+        sub();
+        break;
+    case 2:
+        cout<<"You have selected the Orc"<<endl;
+        hp=70;
+        dmg=25;
+        armor=80;
+        sub();
+        break;
+    case 3:
+        cout<<"You have selected the Troll"<<endl;
+        dmg=20;
+        hp=100;
+        armor=50;
+        sub();
+        break;
+    case 4:
+        cout<<"You have selected the Elf"<<endl;
+        dmg=10;
+        hp=200;
+        armor=20;
+        sub();
+        break;
+    case 5: /* Classes details */
+        cout<<"Human have big hp and low dmg (hp=150; dmg=15 )"<<endl;
+        cout<<"Orc have low hp and big dmg (hp=70; dmg=25)"<<endl;
+        cout<<"Troll is faster than the others and have medium hp and dmg (hp=100; dmg=20;armor=15"<<endl;
+        cout<<"Elf have very big hp ,very low dmg (hp=200; dmg=10)"<<endl;
+        cout<<endl;
+        goto Loop_1;
+        break;
+    case 6: /* The BACK button */
+        cout<<"Select a number:"<<endl;
+        cout<<"1.Play game"<<endl;
+        cout<<"2.How to play"<<endl;
+        cout<<"3.Exit"<<endl;
+        int number_menu;
+        cin>>number_menu;
+
+        while(number_menu>3  || number_menu<1)  /* Not recongnizing any other number bigger or smaller than our options */
+        {
+            cout<<"Wrong number, please select another one"<<endl;
+            cin>>number_menu;
+        }
+        cout<<endl;
+
+        switch(number_menu) 
+        {
+        case 1:
+            clase();
+            break;
+
+        case 2:
+            rules();
+            break;
+
+        case 3:
+
+            break;
+        }
+        break;
+
+    }
+
+
+
+}
+
+
+
+int menu() /* Main menu */
+{
+    cout<<"Select a number:"<<endl;
+    cout<<"1.Play game"<<endl;
+    cout<<"2.How to play"<<endl;
+    cout<<"3.Exit"<<endl;
+    int number_menu;
+    cin>>number_menu;
+
+    while(number_menu>3  || number_menu<1)
+    {
+        cout<<"Wrong number, please select another one"<<endl;
+        cin>>number_menu;
+    }
+    cout<<endl;
+
+    switch(number_menu)
+    {
+    case 1:
+        clase();
+        break;
+
+    case 2:
+        rules();
+        break;
+
+    case 3:
+        return 0;
+        break;
+    }
+}
+
+
+
+
+int main()
+{
+    menu();
+}
